@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 // Desafio Super Trunfo - Países
 // Tema 2 - Comparação das Cartas
@@ -24,7 +25,20 @@ int main() {
 
     float superPoder1, superPoder2;
     
-    int opcao;
+    int opcao; 
+
+    // Nivel mestre Variáveis
+
+    int opcao1, opcao2;
+
+    float atributo1Carta1, atributo1Carta2;
+    float atributo2Carta1, atributo2Carta2;
+
+    float somaCarta1, somaCarta2;
+
+    char nomeAtributo1[30];
+    char nomeAtributo2[30];
+
     // Cadastro das Cartas:
     // Implemente a lógica para solicitar ao usuário que insira os dados das cidades
     // utilizando a função scanf para capturar as entradas.
@@ -110,8 +124,8 @@ int main() {
     int resultadoSuperPoder = superPoder1 > superPoder2;
     */
     
-    // Menu interativo
-
+    // Menu interativo (antigo - nivel aventureiro- mantido para referência)
+    /*
     printf("\n==============================\n");
     printf("Menu de comparação\n");
     printf("==============================\n");
@@ -223,6 +237,192 @@ int main() {
             printf("\nOpção inválida!\n");
             break;
     }
+    */
+    
+    // Nível mestre comparação com dois atributos
+
+    printf("\n===========================\n");
+    printf("SUPER TRUNFO\n");
+    printf("===========================\n");
+
+    // Primeiro menu
+
+    printf("\nEscolha o primeiro atributo:\n");
+
+    printf("1 - População\n");
+    printf("2 - Área\n");
+    printf("3 - PIB\n");
+    printf("4 - Pontos Turísticos\n");
+    printf("5 - Densidade Demográfica\n");
+
+    printf("\nDigite a opção: ");
+    scanf("%d", &opcao1);
+
+    // Segundo menu
+
+    printf("\nEscolha o segundo atributo:\n");
+
+    if (opcao1 != 1)
+        printf("1 - população\n");
+    
+    if (opcao1 != 2) 
+        printf("2 - Área\n");
+    
+    if (opcao1 != 3)
+        printf("3 - PIB\n");
+    
+    if (opcao1 != 4)
+        printf("4 - Pontos Turísticos\n");
+
+    if (opcao1 != 5)
+        printf("5 - Densidade Demográfica\n");
+
+    printf("\nDigite a opção: ");
+    scanf("%d", &opcao2);
+
+    // verificação para não repetir atributos já escolhidos
+
+    if (opcao1 == opcao2) {
+        printf("\nErro: Você escolheu o mesmo atributo duas vezes!\n");
+        return 0;
+    }
+
+    // Atributo 1
+
+    switch (opcao1) {
+
+        case 1:
+            atributo1Carta1 = populacao1;
+            atributo1Carta2 = populacao2;
+
+            sprintf(nomeAtributo1, "População");
+            break;
+        
+        case 2:
+            atributo1Carta1 = area1;
+            atributo1Carta2 = area2;
+
+            sprintf(nomeAtributo1, "Área");
+            break;
+
+        case 3:
+            atributo1Carta1 = pib1;
+            atributo1Carta2 = pib2;
+
+            sprintf(nomeAtributo1, "PIB");
+            break;
+        
+        case 4:
+            atributo1Carta1 = pontosTuristicos1;
+            atributo1Carta2 = pontosTuristicos2;
+
+            sprintf(nomeAtributo1, "Pontos Turísticos");
+            break;
+
+        case 5:
+            atributo1Carta1 = densidade1;
+            atributo1Carta2 = densidade2;
+
+            sprintf(nomeAtributo1, "Densidade Demográfica");
+            break;
+
+        default:
+            printf("\nOpção inválida!\n");
+            return 0 ;
+    }
+
+    // Atributo 2
+    
+    switch (opcao2) {
+    
+        case 1:
+            atributo2Carta1 = populacao1;
+            atributo2Carta2 = populacao2;
+
+            sprintf(nomeAtributo2, "População");
+            break;
+
+        case 2:
+            atributo2Carta1 = area1;
+            atributo2Carta2 = area2;
+            
+            sprintf(nomeAtributo2, "Área");
+            break;
+        
+        case 3:
+            atributo2Carta1 = pib1;
+            atributo2Carta2 = pib2;
+
+            sprintf(nomeAtributo2, "PIB");
+            break;
+
+        case 4:
+            atributo2Carta1 = pontosTuristicos1;
+            atributo2Carta2 = pontosTuristicos2;
+            
+            sprintf(nomeAtributo2, "Pontos Turísticos");
+            break;
+
+        case 5:
+            atributo2Carta1 = densidade1;
+            atributo2Carta2 = densidade2;
+
+            sprintf(nomeAtributo2, "Densidade Demográfica");
+            break;
+
+        default:
+            printf("\nOpção inválida!\n");
+            return 0;
+    }
+
+    // Regra especial densidade menor valor vence
+
+    if (opcao1 == 5) {
+        atributo1Carta1 = 1 / atributo1Carta1;
+        atributo1Carta2 = 1 / atributo1Carta2;
+    }
+
+    if (opcao2 == 5) {
+        atributo2Carta1 = 1 / atributo2Carta1;
+        atributo2Carta2 = 1 / atributo2Carta2;
+    }
+
+    // Soma dos atributos
+
+    somaCarta1 = atributo1Carta1 + atributo2Carta1;
+    somaCarta2 = atributo1Carta2 + atributo2Carta2;
+
+    // Exibição dos resultados
+
+    printf("\n=============================\n");
+    printf("RESULTADO DA COMPARAÇÃO\n");
+    printf("=============================\n");
+
+    printf("\nCarta1: %s\n", cidade1);
+    printf("Carta2: %s\n", cidade2);
+
+    printf("\nPrimeiro atributo: %s\n", nomeAtributo1);
+    printf("%s: %.2f\n", cidade1, atributo1Carta1);
+    printf("%s: %.2f\n", cidade2, atributo1Carta2);
+
+    printf("\nSegundo atributo: %s\n", nomeAtributo2);
+    printf("%s: %.2f\n", cidade1, atributo2Carta1);
+    printf("%s: %.2f\n", cidade2, atributo2Carta2);
+
+    printf("\nSoma dos atributos:\n");
+
+    printf("%s: %.2f\n", cidade1, somaCarta1);
+    printf("%s: %.2f\n", cidade2, somaCarta2);
+
+    // Operador Tenário
+
+    printf("\n Resultado Final:\n");
+
+    (somaCarta1 > somaCarta2)
+        ? printf("%s venceu!\n", cidade1)
+        : (somaCarta2 > somaCarta1)
+            ? printf("%s venceu!\n", cidade2)
+            : printf("Empate!\n");
 
      // Estrutura De decisão (nível novato)
      // if (populacao1 > populacao2) {
